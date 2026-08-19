@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mohamed Nagiub | Data Analyst</title>
+  <!-- Font Awesome 6 (Free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* ----- RESET & BASE ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #0d0f14;
+      color: #eaeef2;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ----- SCROLL ANIMATIONS (reveal) ----- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ----- TYPOGRAPHY ----- */
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      letter-spacing: -0.5px;
+      position: relative;
+      display: inline-block;
+    }
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, #6c8cff, #a78bfa);
+      border-radius: 4px;
+    }
+
+    .highlight {
+      color: #a78bfa;
+    }
+
+    /* ----- HEADER / NAV (with new text logo) ----- */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13, 15, 20, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      padding: 14px 0;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    /* ====== NEW TEXT LOGO STYLES ====== */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+      text-align: left;
+    }
+    .logo-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .logo-name .highlight-logo {
+      color: #a78bfa;
+    }
+    .logo-title {
+      font-size: 0.7rem;
+      font-weight: 400;
+      color: #8892a0;
+      letter-spacing: 2.5px;
+      margin-top: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      font-weight: 500;
+    }
+    .nav-links a {
+      font-size: 1rem;
+      transition: color 0.2s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #a78bfa;
+      transition: width 0.3s;
+    }
+    .nav-links a:hover {
+      color: #a78bfa;
+    }
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* ----- HERO ----- */
+    .hero {
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      padding: 40px 0;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .hero-content h1 {
+      font-size: 3.2rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1.2rem;
+    }
+    .hero-content h1 .highlight {
+      background: linear-gradient(135deg, #6c8cff, #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: 1.2rem;
+      color: #b0b8c5;
+      max-width: 500px;
+      margin-bottom: 2rem;
+    }
+
+    .typing-wrapper {
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: #c8d0dd;
+      margin-bottom: 1.8rem;
+      min-height: 2.8rem;
+    }
+    .typing-wrapper span {
+      color: #a78bfa;
+      font-weight: 500;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-block;
+      padding: 12px 32px;
+      border-radius: 40px;
+      font-weight: 600;
+      transition: all 0.3s;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #6c8cff, #a78bfa);
+      color: #fff;
+      box-shadow: 0 8px 24px rgba(108, 140, 255, 0.25);
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(108, 140, 255, 0.4);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid #a78bfa;
+      color: #eaeef2;
+    }
+    .btn-outline:hover {
+      background: rgba(167, 139, 250, 0.1);
+      transform: translateY(-3px);
+    }
+
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+    .hero-visual .placeholder-icon {
+      font-size: 12rem;
+      color: #2a2f3a;
+      background: radial-gradient(circle at 30% 30%, #1e232b, #0d0f14);
+      padding: 40px;
+      border-radius: 40px;
+      border: 1px solid #2a2f3a;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    }
+    .hero-visual .floating-badge {
+      position: absolute;
+      bottom: 10%;
+      right: 5%;
+      background: #1e232b;
+      padding: 12px 20px;
+      border-radius: 40px;
+      border: 1px solid #2a2f3a;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+      100% { transform: translateY(0); }
+    }
+
+    /* ----- ABOUT ----- */
+    .about {
+      padding: 80px 0;
+      background: #11151b;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      color: #b8c0cc;
+      margin-bottom: 1.2rem;
+      font-size: 1.05rem;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 1.5rem;
+    }
+    .skill-tag {
+      background: #1e232b;
+      padding: 6px 18px;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      border: 1px solid #2a2f3a;
+      color: #c8d0dd;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .stat-card {
+      background: #1a1f26;
+      padding: 24px;
+      border-radius: 16px;
+      border: 1px solid #252b34;
+      transition: transform 0.2s;
+    }
+    .stat-card:hover {
+      transform: translateY(-4px);
+      border-color: #a78bfa;
+    }
+    .stat-number {
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: #a78bfa;
+    }
+    .stat-label {
+      color: #8892a0;
+      font-size: 0.95rem;
+    }
+
+    /* ----- PROJECTS (Dashboard) ----- */
+    .projects {
+      padding: 80px 0;
+    }
+
+    .project-card {
+      background: #151a21;
+      border-radius: 24px;
+      border: 1px solid #252b34;
+      overflow: hidden;
+      transition: transform 0.3s, border-color 0.3s;
+      margin-bottom: 3rem;
+    }
+    .project-card:hover {
+      transform: translateY(-6px);
+      border-color: #6c8cff;
+    }
+
+    .project-header {
+      padding: 28px 32px 0 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .project-header h3 {
+      font-size: 1.8rem;
+      font-weight: 600;
+    }
+    .project-badge {
+      background: #1e232b;
+      padding: 4px 16px;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      border: 1px solid #2a2f3a;
+      color: #a78bfa;
+    }
+
+    .project-body {
+      padding: 16px 32px 28px 32px;
+    }
+    .project-body p {
+      color: #b8c0cc;
+      margin-bottom: 1.2rem;
+    }
+
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 1.2rem;
+    }
+    .project-tech span {
+      background: #0d0f14;
+      padding: 4px 14px;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      border: 1px solid #2a2f3a;
+      color: #a0aab8;
+    }
+
+    .project-dashboard-preview {
+      background: #0d0f14;
+      padding: 24px 32px;
+      border-radius: 16px;
+      border: 1px solid #252b34;
+      margin-bottom: 1.2rem;
+      overflow-x: auto;
+    }
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 16px;
+    }
+    .dashboard-item {
+      background: #151a21;
+      padding: 14px 16px;
+      border-radius: 12px;
+      text-align: center;
+      border: 1px solid #252b34;
+    }
+    .dashboard-item .value {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #a78bfa;
+    }
+    .dashboard-item .label {
+      font-size: 0.8rem;
+      color: #8892a0;
+      margin-top: 4px;
+    }
+
+    .project-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+    .project-actions .btn {
+      padding: 8px 24px;
+      font-size: 0.9rem;
+    }
+
+    /* ====== MODAL / LIGHTBOX STYLES ====== */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.92);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .modal-overlay.active {
+      display: flex;
+    }
+    .modal-content {
+      position: relative;
+      max-width: 95%;
+      max-height: 95%;
+    }
+    .modal-content img {
+      width: 100%;
+      height: auto;
+      max-height: 90vh;
+      border-radius: 12px;
+      border: 1px solid #2a2f3a;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+      object-fit: contain;
+    }
+    .modal-close {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: #1e232b;
+      border: 1px solid #2a2f3a;
+      color: #eaeef2;
+      font-size: 28px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.2s;
+    }
+    .modal-close:hover {
+      background: #a78bfa;
+      color: #0d0f14;
+      border-color: #a78bfa;
+    }
+
+    /* ----- CONTACT ----- */
+    .contact {
+      padding: 80px 0;
+      background: #11151b;
+    }
+
+    .contact-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .contact-wrapper p {
+      color: #b8c0cc;
+      max-width: 500px;
+      margin-bottom: 2rem;
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .contact-links a {
+      font-size: 1.8rem;
+      color: #8892a0;
+      transition: color 0.2s, transform 0.2s;
+    }
+    .contact-links a:hover {
+      color: #a78bfa;
+      transform: scale(1.1);
+    }
+
+    /* ----- FOOTER ----- */
+    footer {
+      padding: 32px 0;
+      border-top: 1px solid #1e232b;
+      text-align: center;
+      color: #5a6475;
+      font-size: 0.9rem;
+    }
+
+    /* ----- RESPONSIVE ----- */
+    @media (max-width: 900px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .hero-content h1 {
+        font-size: 2.6rem;
+      }
+      .hero-sub {
+        margin: 0 auto 1.5rem;
+      }
+      .btn-group {
+        justify-content: center;
+      }
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+      .about-stats {
+        grid-template-columns: 1fr 1fr;
+      }
+      .typing-wrapper {
+        min-height: auto;
+      }
+      .hero-visual .placeholder-icon {
+        font-size: 8rem;
+        padding: 24px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav-links {
+        gap: 1rem;
+        font-size: 0.9rem;
+      }
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+      .section-title {
+        font-size: 1.8rem;
+      }
+      .project-header {
+        flex-direction: column;
+      }
+      .dashboard-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .logo-name {
+        font-size: 1.2rem;
+      }
+      .logo-title {
+        font-size: 0.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ====== HEADER (with the new text logo) ====== -->
+<header>
+  <div class="container nav">
+    <!-- ====== NEW TEXT LOGO ====== -->
+    <div class="logo">
+      <div class="logo-text">
+        <div class="logo-name">
+          MOHAMED <span class="highlight-logo">NAGIUB</span>
+        </div>
+        <div class="logo-title">DATA ANALYST</div>
+      </div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<!-- ====== HERO ====== -->
+<section class="hero" id="home">
+  <div class="container hero-grid">
+    <div class="hero-content">
+      <h1>Hi, I'm <span class="highlight">Mohamed Nagiub</span></h1>
+      <div class="typing-wrapper">
+        <i class="fas fa-code" style="margin-right:8px; color:#a78bfa;"></i>
+        <span id="typed-text"></span>
+      </div>
+      <p class="hero-sub">
+        Data Analyst | Turning raw data into actionable insights with a passion for Education, Automotive, and Sports Performance.
+      </p>
+      <div class="btn-group">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="#contact" class="btn btn-outline">Contact Me</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="placeholder-icon">
+        <i class="fas fa-chart-line"></i>
+      </div>
+      <div class="floating-badge">
+        <i class="fas fa-database" style="color:#a78bfa;"></i>
+        <span>Data Analyst</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== ABOUT ====== -->
+<section class="about" id="about">
+  <div class="container">
+    <h2 class="section-title reveal">About Me</h2>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>
+          A recent Computer Technology graduate equipped with strong data analytical skills and a proven ability to collect, process, and interpret complex datasets effectively. Passionate about transforming raw data into actionable insights to support decision-making, with a specific interest in the Education, Automotive, and Sports Performance sectors.
+        </p>
+        <p>
+          Possesses hands-on experience in team leadership, project management, and analyzing user behavior patterns. Additionally, demonstrates a solid foundation in UI/UX design and is highly skilled in leveraging AI tools across diverse fields, including task automation, content generation, and creative problem-solving.
+        </p>
+        <div class="skill-tags">
+          <span class="skill-tag">Excel</span>
+          <span class="skill-tag">Data Cleaning</span>
+          <span class="skill-tag">Dashboarding</span>
+          <span class="skill-tag">Statistical Analysis</span>
+          <span class="skill-tag">UI/UX</span>
+          <span class="skill-tag">AI Tools</span>
+        </div>
+      </div>
+      <div class="about-stats reveal">
+        <div class="stat-card">
+          <div class="stat-number">5+</div>
+          <div class="stat-label">Projects Completed</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">10k+</div>
+          <div class="stat-label">Data Rows Processed</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">3</div>
+          <div class="stat-label">Sectors Explored</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Client Satisfaction</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== PROJECTS ====== -->
+<section class="projects" id="projects">
+  <div class="container">
+    <h2 class="section-title reveal">Featured Project</h2>
+
+    <!-- Project Card: Sales Analysis Dashboard -->
+    <div class="project-card reveal">
+      <div class="project-header">
+        <h3>Sales Analysis Dashboard</h3>
+        <span class="project-badge"><i class="fas fa-chart-pie"></i> Data Analytics</span>
+      </div>
+      <div class="project-body">
+        <p>
+          A comprehensive sales analysis project built from a raw dataset. The goal was to clean, structure, and extract meaningful insights to help identify trends, optimize shipping modes, and improve order priority decisions.
+        </p>
+        <div class="project-tech">
+          <span>Excel</span>
+          <span>Data Cleaning</span>
+          <span>Pivot Tables</span>
+          <span>Dashboard Design</span>
+        </div>
+
+        <!-- Dashboard Preview (simulated KPI cards) -->
+        <div class="project-dashboard-preview">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap;">
+            <span style="font-weight:600; color:#c8d0dd;"><i class="fas fa-chart-simple" style="color:#a78bfa; margin-right:8px;"></i>Dashboard Snapshot</span>
+            <span style="font-size:0.8rem; color:#5a6475;">Based on 25,000+ order records</span>
+          </div>
+          <div class="dashboard-grid">
+            <div class="dashboard-item">
+              <div class="value">25K</div>
+              <div class="label">Total Orders</div>
+            </div>
+            <div class="dashboard-item">
+              <div class="value">$10.9M</div>
+              <div class="label">Total Sales</div>
+            </div>
+            <div class="dashboard-item">
+              <div class="value">1.5K</div>
+              <div class="label">Customers</div>
+            </div>
+            <div class="dashboard-item">
+              <div class="value">-2.2%</div>
+              <div class="label">Profit Margin</div>
+            </div>
+          </div>
+        </div>
+
+        <p style="font-size:0.95rem; color:#8892a0;">
+          <i class="fas fa-check-circle" style="color:#6c8cff; margin-right:6px;"></i>
+          Cleaned and normalized raw sales data, built interactive pivot tables, and delivered a clear dashboard highlighting key performance indicators.
+        </p>
+
+        <div class="project-actions">
+          <a href="javascript:void(0)" class="btn btn-primary" style="padding:8px 24px; font-size:0.9rem;" onclick="openModal()">
+            <i class="fas fa-eye"></i> View Dashboard
+          </a>
+          <a href="#" class="btn btn-outline" style="padding:8px 24px; font-size:0.9rem;">
+            <i class="fab fa-github"></i> Source Code
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- additional project placeholders (optional) -->
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-top:2rem;">
+      <div class="project-card reveal" style="margin-bottom:0;">
+        <div class="project-header" style="padding:20px 24px 0 24px;">
+          <h4 style="font-size:1.2rem;">Coming Soon</h4>
+        </div>
+        <div class="project-body" style="padding:16px 24px 24px 24px;">
+          <p style="font-size:0.95rem; color:#8892a0;">More analytics projects on the way.</p>
+        </div>
+      </div>
+      <div class="project-card reveal" style="margin-bottom:0;">
+        <div class="project-header" style="padding:20px 24px 0 24px;">
+          <h4 style="font-size:1.2rem;">Coming Soon</h4>
+        </div>
+        <div class="project-body" style="padding:16px 24px 24px 24px;">
+          <p style="font-size:0.95rem; color:#8892a0;">Stay tuned for interactive dashboards.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== CONTACT ====== -->
+<section class="contact" id="contact">
+  <div class="container contact-wrapper">
+    <h2 class="section-title reveal">Let's Connect</h2>
+    <p class="reveal">
+      I'm always open to new opportunities, freelance projects, or just a friendly chat about data!
+    </p>
+    <div class="contact-links reveal">
+      <a href="mailto:mohamednagiub011@gmail.com" aria-label="Email">
+        <i class="fas fa-envelope"></i>
+      </a>
+      <a href="#" aria-label="LinkedIn">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+      <a href="#" aria-label="GitHub">
+        <i class="fab fa-github"></i>
+      </a>
+      <a href="#" aria-label="Twitter">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FOOTER ====== -->
+<footer>
+  <div class="container">
+    &copy; 2025 Mohamed Nagiub. Built with <i class="fas fa-heart" style="color:#a78bfa; margin:0 4px;"></i> for data.
+  </div>
+</footer>
+
+<!-- ====== DASHBOARD MODAL (Popup) ====== -->
+<div class="modal-overlay" id="dashboardModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <!-- Important: Save your dashboard image as 'dashboard.png' in the same folder -->
+    <img src="dashboard.png" alt="Sales Dashboard Full Preview">
+  </div>
+</div>
+
+<!-- ====== SCRIPTS ====== -->
+<script>
+  // ----- Typing Effect -----
+  const typedText = document.getElementById('typed-text');
+  const words = ['Data Analyst', 'Insight Generator', 'Dashboard Designer', 'Problem Solver'];
+  let wordIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+
+  function typeEffect() {
+    const currentWord = words[wordIndex];
+    if (isDeleting) {
+      typedText.textContent = currentWord.substring(0, charIndex - 1);
+      charIndex--;
+    } else {
+      typedText.textContent = currentWord.substring(0, charIndex + 1);
+      charIndex++;
+    }
+
+    if (!isDeleting && charIndex === currentWord.length) {
+      isDeleting = true;
+      setTimeout(typeEffect, 2000);
+      return;
+    }
+    if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      wordIndex = (wordIndex + 1) % words.length;
+      setTimeout(typeEffect, 400);
+      return;
+    }
+    const speed = isDeleting ? 60 : 100;
+    setTimeout(typeEffect, speed);
+  }
+
+  typeEffect();
+
+  // ----- Scroll Reveal (Intersection Observer) -----
+  const reveals = document.querySelectorAll('.reveal');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, {
+    threshold: 0.15,
+    rootMargin: '0px 0px -30px 0px'
+  });
+
+  reveals.forEach(el => observer.observe(el));
+
+  // ----- Smooth nav scroll -----
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // ====== Modal Open / Close Functions ======
+  function openModal() {
+    document.getElementById('dashboardModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('dashboardModal').classList.remove('active');
+    document.body.style.overflow = 'auto';
+  }
+
+  document.getElementById('dashboardModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+      closeModal();
+    }
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closeModal();
+    }
+  });
+</script>
+
+</body>
+</html>
