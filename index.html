@@ -82,7 +82,7 @@
 
     .nav {
       display: flex;
-      justify-content: center;  /* الأزرار في النص */
+      justify-content: center;
       align-items: center;
       flex-wrap: wrap;
     }
@@ -395,7 +395,7 @@
       font-size: 0.9rem;
     }
 
-    /* ====== MODAL / LIGHTBOX STYLES ====== */
+    /* ====== MODAL / LIGHTBOX STYLES (Reused for Dashboard & ERD) ====== */
     .modal-overlay {
       display: none;
       position: fixed;
@@ -479,6 +479,16 @@
     }
     .sql-card .project-tech {
       margin-bottom: 16px;
+    }
+    /* New: Button group inside SQL cards */
+    .sql-actions {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+    .sql-actions .btn {
+      padding: 6px 18px;
+      font-size: 0.8rem;
     }
 
     /* ----- CONTACT ----- */
@@ -640,6 +650,7 @@
           <span class="skill-tag">AI Tools</span>
           <span class="skill-tag">SQL</span>
           <span class="skill-tag">Database Design</span>
+          <span class="skill-tag">ERD</span>
         </div>
       </div>
       <div class="about-stats reveal">
@@ -686,7 +697,7 @@
           <span>Dashboard Design</span>
         </div>
 
-        <!-- Dashboard Preview (simulated KPI cards) -->
+        <!-- Dashboard Preview -->
         <div class="project-dashboard-preview">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap;">
             <span style="font-weight:600; color:#c8d0dd;"><i class="fas fa-chart-simple" style="color:#a78bfa; margin-right:8px;"></i>Dashboard Snapshot</span>
@@ -718,10 +729,10 @@
         </p>
 
         <div class="project-actions">
-          <a href="javascript:void(0)" class="btn btn-primary" style="padding:8px 24px; font-size:0.9rem;" onclick="openModal()">
+          <a href="javascript:void(0)" class="btn btn-primary" onclick="openModal('dashboard.png')">
             <i class="fas fa-eye"></i> View Dashboard
           </a>
-          <a href="#" class="btn btn-outline" style="padding:8px 24px; font-size:0.9rem;">
+          <a href="#" class="btn btn-outline">
             <i class="fab fa-github"></i> Source Code
           </a>
         </div>
@@ -746,9 +757,14 @@
           <span>Normalization</span>
           <span>Foreign Keys</span>
         </div>
-        <a href="https://github.com/Mohamed077-n/portfolio/blob/main/Ecommerce.sql" class="btn btn-outline" style="padding:6px 20px; font-size:0.85rem;">
-          <i class="fab fa-github"></i> View Code
-        </a>
+        <div class="sql-actions">
+          <a href="https://github.com/Mohamed077-n/portfolio/blob/main/hospital.sql" class="btn btn-outline">
+            <i class="fab fa-github"></i> View Code
+          </a>
+          <a href="C:\Users\MM\Desktop\portoflio\Hospital erd.png" class="btn btn-primary" onclick="openModal('hospital_erd.png')">
+            <i class="fas fa-project-diagram"></i> View ERD
+          </a>
+        </div>
       </div>
 
       <!-- SQL Project 2: E-Commerce Platform -->
@@ -766,9 +782,14 @@
           <span>Data Integrity</span>
           <span>Joins</span>
         </div>
-        <a href="https://github.com/Mohamed077-n/portfolio/blob/main/Ecommerce.sql" class="btn btn-outline" style="padding:6px 20px; font-size:0.85rem;">
-          <i class="fab fa-github"></i> View Code
-        </a>
+        <div class="sql-actions">
+          <a href="https://github.com/Mohamed077-n/portfolio/blob/main/Ecommerce.sql" class="btn btn-outline">
+            <i class="fab fa-github"></i> View Code
+          </a>
+          <a href="C:\Users\MM\Desktop\portoflio\Ecommerce ERD.png" class="btn btn-primary" onclick="openModal('ecommerce_erd.png')">
+            <i class="fas fa-project-diagram"></i> View ERD
+          </a>
+        </div>
       </div>
 
     </div>
@@ -786,14 +807,19 @@
       <a href="mailto:mohamednagiub011@gmail.com" aria-label="Email">
         <i class="fas fa-envelope"></i>
       </a>
-      <a href="#" aria-label="LinkedIn">
+      <a href="https://www.linkedin.com/in/moahmed-nagiub-760aaa323/" aria-label="LinkedIn">
         <i class="fab fa-linkedin-in"></i>
       </a>
-      <a href="#" aria-label="GitHub">
+      <a href="https://github.com/Mohamed077-n" aria-label="GitHub">
         <i class="fab fa-github"></i>
       </a>
-      <a href="#" aria-label="Twitter">
-        <i class="fab fa-twitter"></i>
+      <!-- إضافة فيسبوك -->
+      <a href="https://www.facebook.com/mohamed.nagiub.58/" aria-label="Facebook">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <!-- إضافة إنستغرام -->
+      <a href="https://www.instagram.com/mohamed_nagiub02/" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
       </a>
     </div>
   </div>
@@ -806,11 +832,11 @@
   </div>
 </footer>
 
-<!-- ====== DASHBOARD MODAL (Popup) ====== -->
-<div class="modal-overlay" id="dashboardModal">
+<!-- ====== UNIVERSAL MODAL (Popup for Dashboard & ERD) ====== -->
+<div class="modal-overlay" id="universalModal">
   <div class="modal-content">
     <button class="modal-close" onclick="closeModal()">&times;</button>
-    <img src="dashboard.png" alt="Sales Dashboard Full Preview">
+    <img id="modalImage" src="" alt="Preview">
   </div>
 </div>
 
@@ -877,23 +903,28 @@
     });
   });
 
-  // ====== Modal Open / Close Functions ======
-  function openModal() {
-    document.getElementById('dashboardModal').classList.add('active');
+  // ====== UNIVERSAL Modal Functions ======
+  function openModal(imageSrc) {
+    const modal = document.getElementById('universalModal');
+    const img = document.getElementById('modalImage');
+    img.src = imageSrc;
+    modal.classList.add('active');
     document.body.style.overflow = 'hidden';
   }
 
   function closeModal() {
-    document.getElementById('dashboardModal').classList.remove('active');
+    document.getElementById('universalModal').classList.remove('active');
     document.body.style.overflow = 'auto';
   }
 
-  document.getElementById('dashboardModal').addEventListener('click', function(e) {
+  // Close modal on background click
+  document.getElementById('universalModal').addEventListener('click', function(e) {
     if (e.target === this) {
       closeModal();
     }
   });
 
+  // Close modal on Escape key
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
       closeModal();
